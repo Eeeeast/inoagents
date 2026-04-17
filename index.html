@@ -249,13 +249,22 @@
 
 <script>
     // Начальная оценка населения Земли (апрель 2026)
-    const INITIAL_POPULATION = 8119000000;
+    const BASE_POPULATION = 8119000000;
+    const BASE_TIMESTAMP = Date.UTC(2026, 3, 1, 0, 0, 0);
     const BIRTHS_PER_SECOND = 2.6;
     const DEATHS_PER_SECOND = 1.1;
     const NET_GROWTH_PER_SECOND = BIRTHS_PER_SECOND - DEATHS_PER_SECOND; // ~ +1.5 чел/сек
 
+    function getCurrentPopulation() {
+        const now = Date.now();
+        const secondsSinceBase = (now - BASE_TIMESTAMP) / 1000;
+        return (
+            BASE_POPULATION + NET_GROWTH_PER_SECOND * secondsSinceBase
+        );
+    }
+
     let lastTimestamp = Date.now();
-    let currentPopulation = INITIAL_POPULATION;
+    let currentPopulation = getCurrentPopulation();
     const counterElement = document.getElementById('populationCounter');
 
     function formatNumber(num) {
