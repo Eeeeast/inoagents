@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Реестр иностранных агентов — единая база</title>
     <style>
         * {
@@ -12,8 +13,8 @@
 
         body {
             background: #f5f5f0;
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            padding: 2rem 1rem;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 16px;
             color: #1e1e1e;
         }
 
@@ -21,8 +22,8 @@
             max-width: 1000px;
             margin: 0 auto;
             background: white;
-            border-radius: 24px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
             overflow: hidden;
             border: 1px solid #e5e5e0;
         }
@@ -30,14 +31,15 @@
         .header {
             background: #1a2a3a;
             color: white;
-            padding: 1.5rem 2rem;
+            padding: 20px 20px;
             border-bottom: 4px solid #b91c1c;
         }
 
         .header h1 {
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
             font-weight: 500;
             letter-spacing: -0.3px;
+            line-height: 1.3;
         }
 
         .header .badge {
@@ -45,21 +47,21 @@
             background: #b91c1c;
             font-size: 0.7rem;
             text-transform: uppercase;
-            padding: 0.2rem 0.7rem;
+            padding: 4px 12px;
             border-radius: 30px;
-            margin-top: 0.5rem;
+            margin-top: 8px;
             font-weight: 500;
         }
 
         .counter-section {
             background: #fef9e6;
-            padding: 2rem;
+            padding: 24px 16px;
             text-align: center;
             border-bottom: 1px solid #e7e5df;
         }
 
         .counter-label {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #5e5b52;
@@ -67,90 +69,127 @@
         }
 
         .counter {
-            font-size: 4.5rem;
+            font-size: clamp(2.2rem, 10vw, 4.5rem);
             font-weight: 700;
             font-family: 'Courier New', 'Fira Code', monospace;
             color: #1e293b;
             background: white;
             display: inline-block;
-            padding: 0.4rem 1.8rem;
-            border-radius: 80px;
-            margin: 1rem 0 0.5rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 60px;
+            margin: 12px 0 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid #e2e0d6;
+            word-break: break-word;
+            line-height: 1.2;
         }
 
         .update-note {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #6b6a62;
         }
 
         .law-block {
-            padding: 2rem;
+            padding: 20px 18px;
             background: #ffffff;
             border-bottom: 1px solid #eeede8;
         }
 
         .law-block h2 {
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
             font-weight: 600;
-            margin-bottom: 1.2rem;
+            margin-bottom: 16px;
             color: #2c3e4e;
             border-left: 4px solid #b91c1c;
-            padding-left: 1rem;
+            padding-left: 14px;
         }
 
         .condition {
             background: #fafaf7;
-            padding: 1.2rem 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 20px;
             border: 1px solid #e9e8e2;
         }
 
         .condition-title {
             font-weight: 700;
             font-size: 1rem;
-            margin-bottom: 0.6rem;
+            margin-bottom: 8px;
             color: #1f2a3e;
         }
 
         .condition-text {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.45;
             color: #2d3a48;
         }
 
         .condition-text ul {
-            margin-left: 1.4rem;
-            margin-top: 0.3rem;
+            margin-left: 1.2rem;
+            margin-top: 6px;
+            margin-bottom: 4px;
         }
 
         .condition-text li {
-            margin: 0.4rem 0;
+            margin: 6px 0;
         }
 
         .source {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #8f8e86;
-            margin-top: 1.5rem;
+            margin-top: 20px;
             text-align: right;
             border-top: 1px solid #eeede8;
-            padding-top: 1rem;
+            padding-top: 14px;
         }
 
         .footer {
             background: #f0efe9;
-            padding: 1rem 2rem;
-            font-size: 0.7rem;
+            padding: 14px 18px;
+            font-size: 0.65rem;
             color: #6b6a62;
             text-align: center;
+            line-height: 1.4;
         }
 
-        @media (max-width: 640px) {
-            .counter { font-size: 2.8rem; padding: 0.2rem 1rem; }
-            .header h1 { font-size: 1.3rem; }
-            .law-block { padding: 1.2rem; }
+        /* Дополнительные улучшения для телефонов */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .condition {
+                padding: 14px;
+            }
+            .law-block {
+                padding: 16px;
+            }
+            .header {
+                padding: 16px;
+            }
+            .counter-section {
+                padding: 20px 12px;
+            }
+            .condition-text ul {
+                padding-left: 4px;
+            }
+            .condition-text li {
+                word-break: break-word;
+            }
+        }
+
+        /* Очень маленькие экраны (до 360px) */
+        @media (max-width: 360px) {
+            .counter {
+                font-size: 2rem;
+                padding: 0.1rem 0.6rem;
+            }
+            .condition-title {
+                font-size: 0.95rem;
+            }
+            .condition-text {
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -169,7 +208,7 @@
 
     <div class="law-block">
         <h2>Правовые основания для включения в реестр</h2>
-        <p style="margin-bottom: 1.2rem; font-size: 0.9rem; color: #4b5563;">В соответствии с законодательством Российской Федерации статус иностранного агента присваивается лицам (физическим или юридическим), отвечающим <strong>совокупности условий</strong>.</p>
+        <p style="margin-bottom: 16px; font-size: 0.85rem; color: #4b5563; line-height: 1.4;">В соответствии с законодательством Российской Федерации статус иностранного агента присваивается лицам (физическим или юридическим), отвечающим <strong>совокупности условий</strong>.</p>
 
         <div class="condition">
             <div class="condition-title">1. Наличие иностранного влияния</div>
@@ -198,7 +237,7 @@
         </div>
 
         <div class="source">
-            Источник: Федеральный закон «О контроле за деятельностью лиц, находящихся под иностранным влиянием», разъяснения Минюста РФ, консультант.ру, Википедия (по состоянию на 2026 г.)
+            Источник: Федеральный закон «О контроле за деятельностью лиц, находящихся под иностранным влиянием», разъяснения Минюста РФ, консультант.ру, Википедия (по состоянию на 2026 г.)
         </div>
     </div>
 
@@ -209,22 +248,14 @@
 </div>
 
 <script>
-    // Функция для получения текущей оценки населения Земли
-    // Используем публичный прокси к worldometers (cors-anywhere или статическая симуляция с автоподстройкой)
-    // Для надёжности и отсутствия CORS-блокировки используем симуляцию на основе реального референса.
-    // Однако мы можем сделать реальный запрос через бесплатный API (например, worldometer на rapidapi требует ключ),
-    // но чтобы страница работала "из коробки" без регистрации — используем начальное значение 8 119 000 000
-    // и динамически обновляем с примерной скоростью рождаемости (~2.5 человека в секунду).
-    // Это даст эффект реального времени и не потребует от пользователя API-ключей.
-
-    const INITIAL_POPULATION = 8119000000;  // база на апрель 2026 (примерно)
+    // Начальная оценка населения Земли (апрель 2026)
+    const INITIAL_POPULATION = 8119000000;
     const BIRTHS_PER_SECOND = 2.6;
     const DEATHS_PER_SECOND = 1.1;
     const NET_GROWTH_PER_SECOND = BIRTHS_PER_SECOND - DEATHS_PER_SECOND; // ~ +1.5 чел/сек
 
     let lastTimestamp = Date.now();
     let currentPopulation = INITIAL_POPULATION;
-
     const counterElement = document.getElementById('populationCounter');
 
     function formatNumber(num) {
@@ -241,16 +272,10 @@
         counterElement.innerText = formatNumber(currentPopulation);
     }
 
-    // Первоначальная установка
     lastTimestamp = Date.now();
     updateCounter();
+    setInterval(updateCounter, 500);
 
-    // Обновление каждые 500 мс для плавности
-    setInterval(() => {
-        updateCounter();
-    }, 500);
-
-    // Дополнительно: при потере фокуса / скролле ничего не ломается
     window.addEventListener('focus', () => {
         lastTimestamp = Date.now();
         updateCounter();
